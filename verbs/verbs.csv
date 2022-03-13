@@ -1,0 +1,101 @@
+v1,v2,v3,translate
+dig,dug,dug,"копать, рыть"
+know,knew,known,"знать, иметь представление"
+sweep,swept,swept,"мести, подметать, смахивать"
+mean,meant,meant,"значить, иметь в виду, подразумевать"
+do,did,done,"делать, выполнять"
+forget,forgot,forgotten,забывать о (чём-либо)
+ring,rang,rung,"звенеть, звонить"
+break,broke,broken,"ломать, разбивать, разрушать"
+be,"was, were",been,"быть, являться"
+fly,flew,flown,летать
+tell,told,told,рассказывать
+build,built,built,"строить, сооружать"
+stick,stuck,stuck,"втыкать, приклеивать"
+cost,cost,cost,"стоить, обходиться"
+have,had,had,"иметь, обладать"
+take,took,taken,"брать, хватать, взять"
+sell,sold,sold,"продавать, торговать"
+shoot,shot,shot,стрелять
+sink,sank,sunk,"тонуть, погружаться"
+hear,heard,heard,"слышать, услышать"
+write,wrote,written,"писать, записывать"
+swear,swore,sworn,"клясться, присягать"
+choose,chose,chosen,"выбирать, избирать"
+deal,dealt,dealt,"иметь дело, распределять"
+drink,drank,drunk,пить
+give,gave,given,"дать, подать, дарить"
+let,let,let,"позволять, разрешать"
+lend,lent,lent,"одалживать, давать взаймы (в долг)"
+think,thought,thought,"думать, мыслить, размышлять"
+shine,shone,shone,"светить, сиять, озарять"
+see,saw,seen,видеть
+come,came,come,"приходить, подходить"
+wake,woke,woken,"просыпаться, будить"
+tear,tore,torn,"рвать, отрывать"
+make,made,made,"делать, создавать, изготавливать"
+get,got,got,"получать, добираться"
+fight,fought,fought,"драться, сражаться, воевать"
+swim,swam,swum,"плавать, плыть"
+stand,stood,stood,стоять
+wear,wore,worn,носить (одежду)
+meet,met,met,"встречать, знакомиться"
+beat,beat,beaten,"бить, колотить"
+throw,threw,thrown,"бросать, кидать, метать"
+rise,rose,risen,"восходить, вставать, подниматься"
+ride,rode,ridden,"ехать верхом, кататься"
+bite,bit,bitten,кусать
+spend,spent,spent,"тратить, расходовать, проводить (время)"
+freeze,froze,frozen,"замерзать, замирать"
+feel,felt,felt,"чувствовать, ощущать"
+seek,sought,sought,"искать, разыскивать"
+eat,ate,eaten,"есть, поглощать, поедать"
+lose,lost,lost,"терять, лишаться, утрачивать"
+leave,left,left,"покидать, уходить, уезжать, оставлять"
+blow,blew,blown,"дуть, выдыхать"
+fall,fell,fallen,падать
+understand,understood,understood,"понимать, постигать"
+lie,lay,lain,лежать
+begin,began,begun,начинать
+draw,drew,drawn,"рисовать, чертить"
+strike,struck,"struck, stricken","ударять, бить, поражать"
+hide,hid,hidden,"прятать, скрывать"
+lead,led,led,"вести за собой, сопровождать, руководить"
+become,became,become,становиться
+sit,sat,sat,"сидеть, садиться"
+cut,cut,cut,"резать, разрезать"
+pay,paid,paid,"платить, оплачивать, рассчитываться"
+read,read,read,"читать, прочитать"
+buy,bought,bought,"покупать, приобретать"
+bring,brought,brought,"приносить, привозить, доставлять"
+go,went,gone,"идти, двигаться"
+say,said,said,"говорить, сказать, произносить"
+shake,shook,shaken,"трясти, встряхивать"
+run,ran,run,"бежать, бегать"
+hurt,hurt,hurt,"ранить, причинять боль, ушибить"
+swing,swung,swung,"качаться, вертеться"
+keep,kept,kept,"хранить, сохранять, поддерживать"
+bend,bent,bent,гнуть
+find,found,found,"находить, обнаруживать"
+sing,sang,sung,"петь, напевать"
+bet,bet,bet,держать пари
+teach,taught,taught,"учить, обучать"
+lay,laid,laid,"класть, положить, покрывать"
+light,lit,lit,"зажигать, светиться, освещать"
+grow,grew,grown,"расти, вырастать"
+catch,caught,caught,"ловить, поймать, схватить"
+send,sent,sent,"посылать, отправлять, отсылать"
+hold,held,held,"держать, удерживать, задерживать"
+set,set,set,"устанавливать, задавать, назначать"
+feed,fed,fed,кормить
+hit,hit,hit,"ударять, поражать"
+sleep,slept,slept,спать
+show,showed,"shown, showed",показывать
+shut,shut,shut,"закрывать, запирать, затворять"
+steal,stole,stolen,"воровать, красть"
+hang,hung,hung,"вешать, развешивать, висеть"
+win,won,won,"победить, выиграть"
+speak,spoke,spoken,"говорить, разговаривать, высказываться"
+forgive,forgave,forgiven,прощать
+drive,drove,driven,"ездить, подвозить"
+put,put,put,"ставить, помещать, класть"

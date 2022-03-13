@@ -1,36 +1,20 @@
 import {Table, Grid, Button} from 'semantic-ui-react'
 import {VerbRow} from "./VerbRow";
 import React, {useCallback, useState} from "react";
-import { keyBy, mapValues} from "lodash";
+import {keyBy, mapValues, pick} from "lodash";
+import verbs from "./verbs";
+import {Verb, VerbError} from "~Type";
 
-export interface Verb {
-    v1: string,
-    v2: string,
-    v3: string
+interface DictionaryVerb {
+    [index: string]: Verb;
 }
 
-export interface VerbError {
-    v1: string,
-    v2: boolean,
-    v3: boolean
-}
+const verbDictionary = keyBy<Verb>(verbs, verb => verb.v1)
+let withoutAnswer = mapValues<Verb>(verbDictionary, verb => ({...verb, v2: '', v3: '', translate: ''}))
 
-
-let verbs: Verb[] = [
-    {
-        v1: "speak",
-        v2: "spoke",
-        v3: "spoken"
-    },
-    {
-        v1: "break",
-        v2: "broke",
-        v3: "broken"
-    },
-]
-
-let verbDictionary = keyBy<Verb>(verbs, verb => verb.v1)
-let withoutAnswer = mapValues<Verb>(verbDictionary, verb => ({...verb, v2: '', v3: ''}))
+console.log('verbs: ', verbs)
+console.log('verbDictionary: ', verbDictionary)
+console.log('withoutAnswer: ', withoutAnswer)
 
 export const Application = () => {
     let [answers, setAnswers] = useState(withoutAnswer)
@@ -51,6 +35,12 @@ export const Application = () => {
                 v1: answer.v1,
                 v2: verb.v2 !== answer.v2,
                 v3: verb.v3 !== answer.v3,
+                translate: !verb.translate.split(", ").includes(answer.translate),
+                correctAnswer: {
+                    translate: verb.translate,
+                    v2: verb.v2,
+                    v3: verb.v3
+                }
             }
         })
 
@@ -65,7 +55,7 @@ export const Application = () => {
                     <Table celled striped>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell colSpan='3'>Irregular verbs</Table.HeaderCell>
+                                <Table.HeaderCell colSpan='5'>Irregular verbs</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
@@ -77,6 +67,7 @@ export const Application = () => {
                                         value={verb}
                                         onChange={handleAnswer}
                                         error={errorDictionary[verb.v1] || {}}
+                                        correctAnswer={verbDictionary[verb.v1]}
                                     />
                                 ))
                             }
