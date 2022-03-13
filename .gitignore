@@ -1,2 +1,8 @@
-./idea/*
-./english-grammar.iml
+node_modules
+dist
+build
+upload
+.env
+.parcel-cache
+.idea
+yarn-error.log
