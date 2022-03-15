@@ -35,7 +35,7 @@ const verbs: Verb[] = [
     "v1": "forget",
     "v2": "forgot",
     "v3": "forgotten",
-    "translate": "забывать о (чём-либо)"
+    "translate": "забывать, забывать о (чём-либо)"
   },
   {
     "v1": "ring",
@@ -51,7 +51,7 @@ const verbs: Verb[] = [
   },
   {
     "v1": "be",
-    "v2": "was, were",
+    "v2": "was, were",
     "v3": "been",
     "translate": "быть, являться"
   },

@@ -7,9 +7,6 @@
     "outDir": "./dist",
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "~*": ["./src/*"]
-    },
     "rootDir": "./src",
     "jsx": "react",
     "sourceMap": true,

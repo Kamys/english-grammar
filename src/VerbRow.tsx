@@ -1,4 +1,4 @@
-import {Table, Input, Label} from 'semantic-ui-react'
+import {Table, Input} from 'semantic-ui-react'
 import {Verb, VerbError} from "./Type";
 import {FC, useCallback} from "react";
 

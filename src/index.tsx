@@ -4,10 +4,9 @@ import './index.css'
 import 'semantic-ui-css/semantic.min.css'
 import {Application} from "./Application";
 
-
 ReactDOM.render(
     <>
-        <Application/>
+        <Application />
     </>,
     document.getElementById('root')
 )
