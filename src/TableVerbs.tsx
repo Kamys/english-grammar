@@ -1,13 +1,20 @@
 import {Table, Grid, Button} from 'semantic-ui-react'
 import {VerbRow} from "./VerbRow";
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {keyBy, mapValues} from "lodash";
 import {Verb, VerbError} from "./Type";
 
 export const TableVerbs = ({verbDictionary}) => {
-    let withoutAnswer = mapValues<Verb>(verbDictionary, verb => ({...verb, v2: '', v3: '', translate: ''}))
+    let withoutAnswer = useMemo(() => {
+        return mapValues<Verb>(verbDictionary, verb => ({ ...verb, v2: '', v3: '', translate: ''}))
+    }, [verbDictionary])
 
     let [answers, setAnswers] = useState(withoutAnswer)
+
+    useEffect(() => {
+        setAnswers(withoutAnswer)
+    }, [withoutAnswer])
+
     let [errors, setErrors] = useState<VerbError[]>([])
     let errorDictionary = keyBy<VerbError>(errors, verb => verb.v1)
 
@@ -37,10 +44,17 @@ export const TableVerbs = ({verbDictionary}) => {
         setErrors(newErrors)
     }, [answers])
 
+
+    let handleRestart = useCallback(() => {
+        setAnswers(withoutAnswer)
+        setErrors([])
+    }, [answers])
+
+    console.log('verbDictionary: ', verbDictionary)
     return (
         <Grid>
             <Grid.Row>
-                <Grid.Column width={8}>
+                <Grid.Column width={10}>
                     <Table celled striped>
                         <Table.Header>
                             <Table.Row>
@@ -50,19 +64,25 @@ export const TableVerbs = ({verbDictionary}) => {
 
                         <Table.Body>
                             {
-                                Object.values(answers).map(verb => (
-                                    <VerbRow
+                                Object.values(answers).map(verb => {
+                                    console.log(verb.v1, ' = ', verbDictionary[verb.v1])
+                                    return (
+                                      <VerbRow
                                         key={verb.v1}
                                         value={verb}
                                         onChange={handleAnswer}
                                         error={errorDictionary[verb.v1] || {}}
-                                        correctAnswer={verbDictionary[verb.v1]}
-                                    />
-                                ))
+                                        correctAnswer={verbDictionary[verb.v1] || {}}
+                                      />
+                                    )
+                                })
                             }
                         </Table.Body>
                     </Table>
+                </Grid.Column>
+                <Grid.Column width={4}>
                     <Button positive onClick={handleCheck}>Submit</Button>
+                    <Button positive onClick={handleRestart}>Restart</Button>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

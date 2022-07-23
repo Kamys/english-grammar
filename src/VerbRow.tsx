@@ -1,6 +1,6 @@
 import {Table, Input} from 'semantic-ui-react'
 import {Verb, VerbError} from "./Type";
-import {FC, useCallback} from "react";
+import React, {FC, useCallback} from "react";
 
 interface VerbViewProps {
     onChange: (verb: Verb) => void
@@ -30,6 +30,8 @@ export const VerbRow: FC<VerbViewProps> = ({onChange, value, error, correctAnswe
     }, [onChange])
 
     let hasError = error.v2 || error.v3 || error.translate;
+
+     console.log('correctAnswer: ', value, correctAnswer)
 
     return (
         <Table.Row>
