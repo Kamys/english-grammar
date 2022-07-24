@@ -7,7 +7,7 @@ const result = fs.createWriteStream('./result.json', {
 })
 
 const chunks = [];
-fs.createReadStream('./verbs.csv', { encoding: 'utf8' })
+fs.createReadStream('./sourceVerbs.csv', { encoding: 'utf8' })
     .pipe(csv())
     .on('data', (row) => {
         chunks.push(row)

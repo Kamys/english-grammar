@@ -1,12 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import './index.css'
-import 'semantic-ui-css/semantic.min.css'
 import {Application} from "./Application";
+import { createRoot } from 'react-dom/client'
 
-ReactDOM.render(
-    <>
-        <Application />
-    </>,
-    document.getElementById('root')
-)
+const root = document.getElementById('root')
+
+createRoot(root).render(<Application/>)

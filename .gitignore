@@ -6,3 +6,4 @@ upload
 .parcel-cache
 .idea
 yarn-error.log
+/verbs/result.json

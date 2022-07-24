@@ -1,6 +1,6 @@
-import {Verb} from "~Type";
+import {Verb} from "./Type";
 
-const verbs: Verb[] = [
+const sourceVerbs: Verb[] = [
   {
     "v1": "dig",
     "v2": "dug",
@@ -603,4 +603,4 @@ const verbs: Verb[] = [
   }
 ]
 
-export default verbs
+export default sourceVerbs

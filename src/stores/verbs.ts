@@ -1,10 +1,11 @@
 import { createEvent, createStore } from 'effector'
 import { Verb } from '../Type'
 
-const init = createEvent<Verb[]>()
+export const init = createEvent<Verb[]>('name')
 
 const store = createStore<Verb[]>([])
-.on(init, verbs => verbs)
+
+store.on(init, (_, newVerbs) => newVerbs)
 
 
 export const verb = {
