@@ -58,7 +58,7 @@ export const TableVerbs = ({verbDictionary}) => {
                     <Table celled striped>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell colSpan='5'>Irregular verbs v2</Table.HeaderCell>
+                                <Table.HeaderCell colSpan='6'>Irregular verbs v2</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
