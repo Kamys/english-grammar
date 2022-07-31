@@ -1,5 +1,5 @@
-docker stop english-grammar
-docker rm english-grammar
-docker build -t english-grammar:v1 .
-docker run --name english-grammar -d -p 3032:3000 english-grammar:v1
-echo Docker start http://localhost:3032
+docker stop english-grammar-2
+docker rm english-grammar-2
+docker build -t english-grammar:v2 .
+docker run --name english-grammar-2 -d -p 3033:3000 english-grammar:v2
+echo Docker start http://localhost:3033

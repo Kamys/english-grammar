@@ -358,7 +358,7 @@ const verbs: Verb[] = [
   {
     "v1": "strike",
     "v2": "struck",
-    "v3": "struck, stricken",
+    "v3": "struck",
     "translate": "ударять, бить, поражать"
   },
   {

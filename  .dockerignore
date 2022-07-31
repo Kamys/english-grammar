@@ -4,3 +4,5 @@ build
 Dockerfile
 dist
 .parcel-cache
+.idea
+yarn-error.log
