@@ -1,5 +1,6 @@
 import { combine, createEvent, createStore } from 'effector'
-import { $currentQuestion, onNextQuestion, onShowCorrectAnswer } from './verbs'
+import { onNextQuestion, onShowCorrectAnswer } from './verbs'
+import { $currentQuestion } from './answerStatistic'
 
 interface AnswerForm {
   v2: string

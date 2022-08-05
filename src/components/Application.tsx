@@ -1,15 +1,17 @@
 import React from 'react'
 
-import { $currentQuestion, onNextQuestion, onShowCorrectAnswer } from '../stores/verbs'
+import { onNextQuestion, onShowCorrectAnswer } from '../stores/verbs'
 import { VerbView } from './Verb'
 import { useStore } from 'effector-react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
+import { $answerStatistic, $currentQuestion } from '../stores/answerStatistic'
 
 export const Application = () => {
   const currentVerb = useStore($currentQuestion)
+  const answerStatistic = useStore($answerStatistic)
 
   return (
     <Container className="h-100 d-flex flex-column align-items-center">
