@@ -24,23 +24,15 @@ $verbs.on(onShowCorrectAnswer, verbs => {
 })
 
 $verbs.on(onSortVerb, verbs => {
-  console.log("----Sort----")
-  const newSort = [...verbs].sort((a, b) => a.score - b.score)
-  console.log("old: " + verbs.map(v => v.v1 + " " + v.score))
-  console.log("newSort: " + newSort.map(v => v.v1 + " " + v.score))
-  return newSort
+  return [...verbs].sort((a, b) => a.score - b.score)
 })
 
 onNextQuestion.watch(() => {
   const currentIndex = $currentIndex.getState()
   const verbs = $verbs.getState()
-  console.log(currentIndex)
-  console.log("verbs.length " + verbs.length)
   if (currentIndex >= verbs.length - 1) {
-    console.log("onSortVerb")
     onSortVerb()
   } else {
-    console.log("onNextCurrentIndex")
     onNextCurrentIndex()
   }
 })
