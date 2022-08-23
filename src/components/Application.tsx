@@ -7,18 +7,39 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
-import { $answerStatistic, $currentQuestion } from '../stores/answerStatistic'
+import { $currentQuestion } from '../stores/answerStatistic'
+import { Answers } from './Answers'
 
 export const Application = () => {
-  const currentVerb = useStore($currentQuestion)
-  const answerStatistic = useStore($answerStatistic)
-
   return (
-    <Container className="h-100 d-flex flex-column align-items-center">
+    <Container className='h-100 d-flex flex-column align-items-center'>
       <Row className='d-flex justify-content-center mt-5'>
         <h1>English grammar</h1>
       </Row>
-      <Row className="mt-5">
+      <VerbContainer />
+      <Row>
+        <Answers />
+      </Row>
+    </Container>
+  )
+}
+
+const VerbContainer = () => {
+  const currentVerb = useStore($currentQuestion)
+
+  if (!currentVerb) {
+    return (
+      <>
+        <Row>
+          Слова на сегодня выучены
+        </Row>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Row className='mt-5'>
         <Col md={12}>
           <VerbView verb={currentVerb} />
         </Col>
@@ -28,7 +49,7 @@ export const Application = () => {
           <NextButton />
         </Col>
       </Row>
-    </Container>
+    </>
   )
 }
 
@@ -36,6 +57,7 @@ export enum NextButtonState {
   CHECK_ANSWER,
   NEXT_QUESTION,
 }
+
 export const $nextButtonState = createStore<NextButtonState>(NextButtonState.CHECK_ANSWER)
   .on(onShowCorrectAnswer, () => NextButtonState.NEXT_QUESTION)
   .on(onNextQuestion, () => NextButtonState.CHECK_ANSWER)
