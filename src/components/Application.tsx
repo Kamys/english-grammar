@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { onUserNextQuestion, onUserAnswer } from '../stores/verbs'
 import { VerbView } from './Verb'
 import { useStore } from 'effector-react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row, Spinner } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
-import { $currentQuestion } from '../stores/answerStatistic'
+import { $currentQuestion, onInitAnswers, onSortVerb } from '../stores/answerStatistic'
 import { Answers } from './Answers'
+import axios from 'axios'
 
 export const Application = () => {
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/answers').then(response => {
+        setLoading(false)
+        onInitAnswers(response.data)
+        onSortVerb()
+      },
+    )
+  }, [])
+
+  if (isLoading) {
+    return <Spinner animation='grow' />
+  }
+
   return (
     <Container className='h-100 d-flex flex-column align-items-center'>
       <Row className='d-flex justify-content-center mt-5'>

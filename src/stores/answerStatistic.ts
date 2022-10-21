@@ -3,6 +3,7 @@ import { $hasErrors } from './answerForm'
 import { $verbs, onUserNextQuestion, onUserAnswer } from './verbs'
 import { createEvent } from 'effector'
 import { countCorrectAnswerToday, getVerbScore } from './utils'
+import axios from 'axios'
 
 interface Answer {
   v1: string
@@ -10,9 +11,10 @@ interface Answer {
   isCorrect: boolean
 }
 
-const onSortVerb = createEvent()
-
+export const onSortVerb = createEvent()
+export const onInitAnswers = createEvent()
 export const $answers = createStore<Answer[]>([])
+  .on(onInitAnswers, (_, answers)  => answers)
 
 $answers.on(onUserAnswer, answers => {
   const hasError = $hasErrors.getState()
@@ -26,6 +28,17 @@ $answers.on(onUserAnswer, answers => {
       createdAt: Date.now(),
     },
   ]
+})
+
+onUserAnswer.watch(() => {
+  const answers = $answers.getState()
+  axios.post("http://localhost:3000/answers-save", answers)
+    .then(() => {
+      console.log("Answers save!")
+    })
+    .catch(() => {
+      console.error("Failed answers save!")
+    })
 })
 
 $verbs.on(onSortVerb, verbs => {
