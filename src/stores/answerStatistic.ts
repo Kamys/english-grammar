@@ -1,6 +1,6 @@
 import { combine, createStore } from 'effector/effector.cjs'
 import { $hasErrors } from './answerForm'
-import { $verbs, onNextQuestion, onUserAnswer, onSortVerb } from './verbs'
+import { $verbs, onUserNextQuestion, onUserAnswer } from './verbs'
 import { createEvent } from 'effector'
 import { countCorrectAnswerToday, getVerbScore } from './utils'
 
@@ -9,6 +9,8 @@ interface Answer {
   createdAt: number
   isCorrect: boolean
 }
+
+const onSortVerb = createEvent()
 
 export const $answers = createStore<Answer[]>([])
 
@@ -27,18 +29,16 @@ $answers.on(onUserAnswer, answers => {
 })
 
 $verbs.on(onSortVerb, verbs => {
-  const verbsForToday = verbs.filter(verb => countCorrectAnswerToday(verb) < 1)
+  const verbsForToday = verbs.filter(verb => countCorrectAnswerToday(verb) < 2)
 
   return verbsForToday.sort((a, b) => getVerbScore(a) - getVerbScore(b))
 })
 
-onNextQuestion.watch(() => {
-  const currentIndex = $currentIndex.getState()
-  const verbs = $verbs.getState()
-  if (currentIndex >= verbs.length - 1) {
-    onSortVerb()
-  } else {
+onUserNextQuestion.watch(() => {
+  if ($hasNextQuestion.getState()) {
     onNextCurrentIndex()
+  } else {
+    onSortVerb()
   }
 })
 
@@ -50,4 +50,8 @@ export const $currentIndex = createStore<number>(0)
 
 export const $currentQuestion = combine($verbs, $currentIndex, (verbs, currentIndex) => {
   return verbs[currentIndex] || null
+})
+
+export const $hasNextQuestion = combine($verbs, $currentIndex, (verbs, currentIndex) => {
+  return !!verbs[currentIndex + 1]
 })

@@ -13,6 +13,4 @@ export const $verbs = createStore<Verb[]>(sourceVerbs)
 export const $allVerbs = createStore<Verb[]>(sourceVerbs)
 
 export const onUserAnswer = createEvent()
-export const onSortVerb = createEvent()
-
-export const onNextQuestion = createEvent()
+export const onUserNextQuestion = createEvent()
