@@ -12,7 +12,7 @@ export interface Verb {
 export const $verbs = createStore<Verb[]>(sourceVerbs)
 export const $allVerbs = createStore<Verb[]>(sourceVerbs)
 
-export const onShowCorrectAnswer = createEvent()
+export const onUserAnswer = createEvent()
 export const onSortVerb = createEvent()
 
 export const onNextQuestion = createEvent()

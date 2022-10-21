@@ -1,6 +1,12 @@
 import { combine, createEvent, createStore } from 'effector'
-import { onNextQuestion, onShowCorrectAnswer } from './verbs'
+import { onNextQuestion, onUserAnswer } from './verbs'
 import { $currentQuestion } from './answerStatistic'
+
+/**
+ * 1. Текущее стостояние формы
+ * 2. Показывать ли валидацию
+ * 3. Есть ли ошибки
+ */
 
 interface AnswerForm {
   v2: string
@@ -21,12 +27,7 @@ export const $answerForm = createStore<AnswerForm>(initial)
   .on(onChangeV3, (state, payload) => ({ ...state, v3: payload }))
   .on(onNextQuestion, () => initial)
 
-export const $showValidation = createStore(false)
-  .on(onShowCorrectAnswer, () => true)
-  .on(onNextQuestion, () => false)
-
 export const $answerFormErrors = combine($currentQuestion, $answerForm, (currentQuestion, answerForm) => {
-
   if (!currentQuestion) {
     return {} as AnswerFormErrors
   }

@@ -1,6 +1,6 @@
 import { combine, createStore } from 'effector/effector.cjs'
 import { $hasErrors } from './answerForm'
-import { $verbs, onNextQuestion, onShowCorrectAnswer, onSortVerb } from './verbs'
+import { $verbs, onNextQuestion, onUserAnswer, onSortVerb } from './verbs'
 import { createEvent } from 'effector'
 import { countCorrectAnswerToday, getVerbScore } from './utils'
 
@@ -12,7 +12,7 @@ interface Answer {
 
 export const $answers = createStore<Answer[]>([])
 
-$answers.on(onShowCorrectAnswer, answers => {
+$answers.on(onUserAnswer, answers => {
   const hasError = $hasErrors.getState()
   const currentQuestion = $currentQuestion.getState()
 

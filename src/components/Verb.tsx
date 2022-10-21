@@ -7,7 +7,6 @@ import {
   $answerForm,
   $answerFormErrors,
   $hasErrors,
-  $showValidation,
   onChangeV2,
   onChangeV3,
 } from '../stores/answerForm'
@@ -23,9 +22,9 @@ export const VerbView: React.FC<Props> = ({ verb }) => {
   const forms = useStore($answerForm)
   const state = useStore($nextFormState)
   const errors = useStore($answerFormErrors)
-  const showValidation = useStore($showValidation)
   const hasErrors = useStore($hasErrors)
   const answerCorrect = state === QuestionFormStateState.ANSWERED && !hasErrors
+  const showValidation = state === QuestionFormStateState.ANSWERED
 
   return (
     <Form noValidate validated={answerCorrect}>

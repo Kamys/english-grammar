@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { onNextQuestion, onShowCorrectAnswer } from '../stores/verbs'
+import { onNextQuestion, onUserAnswer } from '../stores/verbs'
 import { VerbView } from './Verb'
 import { useStore } from 'effector-react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
@@ -59,7 +59,7 @@ export enum QuestionFormStateState {
 }
 
 export const $nextFormState = createStore<QuestionFormStateState>(QuestionFormStateState.WAITING_ANSWER)
-  .on(onShowCorrectAnswer, () => QuestionFormStateState.ANSWERED)
+  .on(onUserAnswer, () => QuestionFormStateState.ANSWERED)
   .on(onNextQuestion, () => QuestionFormStateState.WAITING_ANSWER)
 
 const NextButton = () => {
@@ -70,5 +70,5 @@ const NextButton = () => {
     return <Button disabled={hasErrors} onClick={() => onNextQuestion()}>Next question!</Button>
   }
 
-  return <Button onClick={() => onShowCorrectAnswer()}>Check!</Button>
+  return <Button onClick={() => onUserAnswer()}>Check!</Button>
 }
