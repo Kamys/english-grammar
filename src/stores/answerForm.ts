@@ -26,6 +26,11 @@ export const $showValidation = createStore(false)
   .on(onNextQuestion, () => false)
 
 export const $answerFormErrors = combine($currentQuestion, $answerForm, (currentQuestion, answerForm) => {
+
+  if (!currentQuestion) {
+    return {} as AnswerFormErrors
+  }
+
   const errors: AnswerFormErrors = {
     v2: currentQuestion.v2 != answerForm.v2 ? currentQuestion.v2 : null,
     v3: currentQuestion.v3 != answerForm.v3 ? currentQuestion.v3 : null

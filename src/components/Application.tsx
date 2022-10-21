@@ -53,21 +53,21 @@ const VerbContainer = () => {
   )
 }
 
-export enum NextButtonState {
-  CHECK_ANSWER,
-  NEXT_QUESTION,
+export enum QuestionFormStateState {
+  WAITING_ANSWER,
+  ANSWERED,
 }
 
-export const $nextButtonState = createStore<NextButtonState>(NextButtonState.CHECK_ANSWER)
-  .on(onShowCorrectAnswer, () => NextButtonState.NEXT_QUESTION)
-  .on(onNextQuestion, () => NextButtonState.CHECK_ANSWER)
+export const $nextFormState = createStore<QuestionFormStateState>(QuestionFormStateState.WAITING_ANSWER)
+  .on(onShowCorrectAnswer, () => QuestionFormStateState.ANSWERED)
+  .on(onNextQuestion, () => QuestionFormStateState.WAITING_ANSWER)
 
 const NextButton = () => {
-  const state = useStore($nextButtonState)
+  const state = useStore($nextFormState)
   const hasErrors = useStore($hasErrors)
 
-  if (state == NextButtonState.NEXT_QUESTION) {
-    return <Button disabled={hasErrors} onClick={() => onNextQuestion()}>Go to next question!</Button>
+  if (state == QuestionFormStateState.ANSWERED) {
+    return <Button disabled={hasErrors} onClick={() => onNextQuestion()}>Next question!</Button>
   }
 
   return <Button onClick={() => onShowCorrectAnswer()}>Check!</Button>
