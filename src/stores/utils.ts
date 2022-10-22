@@ -22,6 +22,12 @@ const isToday = (dateValue: number) => {
     date.getFullYear() == today.getFullYear()
 }
 
+export const isDoneOnToday = (verb: Verb) => {
+  const answers = getVerbAnswers(verb)
+  const correctAnswersToday = answers.filter(answer => answer.isCorrect && isToday(answer.createdAt))
+  return correctAnswersToday.length >= 2
+}
+
 export const countCorrectAnswerToday = (verb: Verb) => {
   return getVerbAnswers(verb)
     .filter(answer => answer.isCorrect && isToday(answer.createdAt))

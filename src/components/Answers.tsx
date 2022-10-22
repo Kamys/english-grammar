@@ -1,14 +1,16 @@
 import React from 'react'
 import { useStore } from 'effector-react'
 import { ListGroup } from 'react-bootstrap'
-import { $allVerbs } from '../stores/verbs'
+import { $verbsForToday } from '../stores/verbs'
 import { partition } from 'lodash'
 import { $answers } from '../stores/answerStatistic'
 import { getVerbScore } from '../stores/utils'
+import { $verbsLearned } from '../stores/answerForm'
 
 export const Answers = () => {
-  const verbs = useStore($allVerbs)
+  const verbs = useStore($verbsForToday)
   const answers = useStore($answers)
+  const verbsLearned = useStore($verbsLearned)
 
   const items = verbs
     .sort((a, b) => getVerbScore(a) - getVerbScore(b))
@@ -31,6 +33,7 @@ export const Answers = () => {
 
   return (
     <ListGroup as="ol" numbered>
+      <div>Today you learned {verbsLearned.length} words</div>
       {items}
     </ListGroup>
   )

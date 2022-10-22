@@ -1,19 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { onUserNextQuestion, onUserAnswer } from '../stores/verbs'
+import { onUserNextQuestion, onUserAnswer, calcVerbsForToday } from '../stores/verbs'
 import { VerbView } from './Verb'
 import { useStore } from 'effector-react'
-import { Button, Col, Container, Row} from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
-import { $currentQuestion} from '../stores/answerStatistic'
+import { $currentQuestion } from '../stores/answerStatistic'
 import { AnswerLoading } from './AnswerLoading'
 import { VerbAudio } from './VerbAudio'
+import { Answers } from './Answers'
 
 export const Application = () => {
-
-
   return (
     <Container className='h-100 d-flex flex-column align-items-center pt-3'>
       <AnswerLoading>
@@ -21,9 +20,9 @@ export const Application = () => {
           <h1>English grammar</h1>
         </Row>
         <VerbContainer />
-        {/*<Row>
+        <Row>
           <Answers />
-        </Row>*/}
+        </Row>
       </AnswerLoading>
     </Container>
   )
@@ -32,11 +31,15 @@ export const Application = () => {
 const VerbContainer = () => {
   const currentVerb = useStore($currentQuestion)
 
+  useEffect(() => {
+    calcVerbsForToday()
+  }, [])
+
   if (!currentVerb) {
     return (
       <>
         <Row>
-          Слова на сегодня выучены
+          You learned all words on today!
         </Row>
       </>
     )
@@ -49,11 +52,11 @@ const VerbContainer = () => {
           <VerbView verb={currentVerb} />
         </Col>
       </Row>
-      <Row className="d-flex justify-content-center mt-2">
-        <Col md="auto">
+      <Row className='d-flex justify-content-center mt-2'>
+        <Col md='auto'>
           <VerbAudio verbV1={currentVerb.v1} />
         </Col>
-        <Col md="auto">
+        <Col md='auto'>
           <NextButton />
         </Col>
       </Row>

@@ -1,4 +1,4 @@
-import { combine, createEvent, createStore } from 'effector'
+import { createEvent, createStore } from 'effector'
 import sourceVerbs from '../sourceVerbs'
 
 export interface Verb {
@@ -9,8 +9,14 @@ export interface Verb {
   score: number
 }
 
-export const $verbs = createStore<Verb[]>(sourceVerbs)
-export const $allVerbs = createStore<Verb[]>(sourceVerbs)
-
 export const onUserAnswer = createEvent()
 export const onUserNextQuestion = createEvent()
+
+export const initVerbsForToday = createEvent<Verb[]>()
+export const calcVerbsForToday = createEvent()
+
+export const $verbsLearning = createStore<Verb[]>([])
+  .on(initVerbsForToday, (_, verbs) => verbs)
+export const $verbsForToday = createStore<Verb[]>([])
+  .on(initVerbsForToday, (_, verbs) => verbs)
+export const $verbsAll = createStore<Verb[]>(sourceVerbs)

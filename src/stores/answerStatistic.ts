@@ -1,6 +1,6 @@
 import { combine, createStore } from 'effector/effector.cjs'
 import { $hasErrors } from './answerForm'
-import { $verbs, onUserNextQuestion, onUserAnswer } from './verbs'
+import { $verbsLearning, onUserNextQuestion, onUserAnswer } from './verbs'
 import { createEvent } from 'effector'
 import { countCorrectAnswerToday, getVerbScore } from './utils'
 import axios from 'axios'
@@ -41,7 +41,7 @@ onUserAnswer.watch(() => {
     })
 })
 
-$verbs.on(onSortVerb, verbs => {
+$verbsLearning.on(onSortVerb, verbs => {
   const verbsForToday = verbs.filter(verb => countCorrectAnswerToday(verb) < 2)
 
   return verbsForToday.sort((a, b) => getVerbScore(a) - getVerbScore(b))
@@ -61,10 +61,10 @@ export const $currentIndex = createStore<number>(0)
   .on(onNextCurrentIndex, currentIndex => currentIndex + 1)
   .on(onSortVerb, () => 0)
 
-export const $currentQuestion = combine($verbs, $currentIndex, (verbs, currentIndex) => {
+export const $currentQuestion = combine($verbsLearning, $currentIndex, (verbs, currentIndex) => {
   return verbs[currentIndex] || null
 })
 
-export const $hasNextQuestion = combine($verbs, $currentIndex, (verbs, currentIndex) => {
+export const $hasNextQuestion = combine($verbsLearning, $currentIndex, (verbs, currentIndex) => {
   return !!verbs[currentIndex + 1]
 })

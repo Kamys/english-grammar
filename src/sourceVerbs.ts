@@ -60,7 +60,7 @@ const sourceVerbs: Verb[] = [
   },
   {
     "v1": "be",
-    "v2": "was, were",
+    "v2": "was, were",
     "v3": "been",
     "translate": "быть, являться",
     "score": 0,
@@ -418,7 +418,7 @@ const sourceVerbs: Verb[] = [
   {
     "v1": "strike",
     "v2": "struck",
-    "v3": "struck, stricken",
+    "v3": "struck, stricken",
     "translate": "ударять, бить, поражать",
     "score": 0,
   },
@@ -642,7 +642,7 @@ const sourceVerbs: Verb[] = [
   {
     "v1": "show",
     "v2": "showed",
-    "v3": "shown, showed",
+    "v3": "shown, showed",
     "translate": "показывать",
     "score": 0,
   },
