@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { onUserNextQuestion, onUserAnswer } from '../stores/verbs'
 import { VerbView } from './Verb'
 import { useStore } from 'effector-react'
-import { Button, Col, Container, Row, Spinner } from 'react-bootstrap'
+import { Button, Col, Container, Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
-import { $currentQuestion, onInitAnswers, onSortVerb } from '../stores/answerStatistic'
-import { Answers } from './Answers'
-import axios, { AxiosError } from 'axios'
+import { $currentQuestion} from '../stores/answerStatistic'
 import { AnswerLoading } from './AnswerLoading'
+import { VerbAudio } from './VerbAudio'
 
 export const Application = () => {
 
@@ -22,9 +21,9 @@ export const Application = () => {
           <h1>English grammar</h1>
         </Row>
         <VerbContainer />
-        <Row>
+        {/*<Row>
           <Answers />
-        </Row>
+        </Row>*/}
       </AnswerLoading>
     </Container>
   )
@@ -50,8 +49,11 @@ const VerbContainer = () => {
           <VerbView verb={currentVerb} />
         </Col>
       </Row>
-      <Row>
-        <Col md className='d-flex justify-content-center mt-3'>
+      <Row className="d-flex justify-content-center mt-2">
+        <Col md="auto">
+          <VerbAudio verbV1={currentVerb.v1} />
+        </Col>
+        <Col md="auto">
           <NextButton />
         </Col>
       </Row>
