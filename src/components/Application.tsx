@@ -9,33 +9,23 @@ import { createStore } from 'effector'
 import { $hasErrors } from '../stores/answerForm'
 import { $currentQuestion, onInitAnswers, onSortVerb } from '../stores/answerStatistic'
 import { Answers } from './Answers'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { AnswerLoading } from './AnswerLoading'
 
 export const Application = () => {
-  const [isLoading, setLoading] = useState(true)
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/answers').then(response => {
-        setLoading(false)
-        onInitAnswers(response.data)
-        onSortVerb()
-      },
-    )
-  }, [])
-
-  if (isLoading) {
-    return <Spinner animation='grow' />
-  }
 
   return (
-    <Container className='h-100 d-flex flex-column align-items-center'>
-      <Row className='d-flex justify-content-center mt-5'>
-        <h1>English grammar</h1>
-      </Row>
-      <VerbContainer />
-      <Row>
-        <Answers />
-      </Row>
+    <Container className='h-100 d-flex flex-column align-items-center pt-3'>
+      <AnswerLoading>
+        <Row className='d-flex justify-content-center mt-5'>
+          <h1>English grammar</h1>
+        </Row>
+        <VerbContainer />
+        <Row>
+          <Answers />
+        </Row>
+      </AnswerLoading>
     </Container>
   )
 }
