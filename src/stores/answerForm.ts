@@ -40,7 +40,6 @@ export const $hasErrors = combine($answerFormErrors, (answerFormErrors) => {
 
 export const $verbsLearned = combine($verbsAll, $answers, (verbsAll) => {
   let verbs = verbsAll.filter(isDoneOnToday)
-  console.log("$verbsLearned: ", verbs)
   return verbs
 })
 
@@ -50,8 +49,6 @@ calcVerbsForToday.watch(() => {
   const answers = $answers.getState()
 
   const needLeanWordToday = verbsLearned.length <= 10
-  console.log("needLeanWordToday: ", needLeanWordToday)
-  console.log("answers: ", answers)
 
   if(!needLeanWordToday) {
     initVerbsForToday([])

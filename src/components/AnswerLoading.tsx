@@ -27,7 +27,6 @@ export const AnswerLoading: React.FC<Props> = ({ children }) => {
   }, [])
 
   if (error) {
-    console.log(error)
     return (
       <>
         <div>Failed load answers: {error.message}</div>

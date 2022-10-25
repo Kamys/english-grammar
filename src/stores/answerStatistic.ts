@@ -33,12 +33,6 @@ $answers.on(onUserAnswer, answers => {
 onUserAnswer.watch(() => {
   const answers = $answers.getState()
   axios.post("http://localhost:3000/answers-save", answers)
-    .then(() => {
-      console.log("Answers save!")
-    })
-    .catch(() => {
-      console.error("Failed answers save!")
-    })
 })
 
 $verbsLearning.on(onSortVerb, verbs => {
