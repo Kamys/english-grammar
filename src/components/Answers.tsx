@@ -1,11 +1,11 @@
 import React from 'react'
 import { useStore } from 'effector-react'
 import { ListGroup } from 'react-bootstrap'
-import { $verbsForToday } from '../stores/verbs'
+import { $verbsForToday } from '../stores'
 import { partition, sortBy } from 'lodash'
-import { $answers } from '../stores/answerStatistic'
-import { getVerbScore } from '../stores/utils'
-import { $verbsLearned } from '../stores/answerForm'
+import { $answers } from '../stores'
+import { getVerbScore } from '../stores'
+import { $verbsLearned } from '../stores'
 
 export const Answers = () => {
   const verbs = useStore($verbsForToday)

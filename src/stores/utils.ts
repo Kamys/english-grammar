@@ -1,6 +1,7 @@
 import { Verb } from './verbs'
 import { partition } from 'lodash'
 import { $answers } from './answerStatistic'
+import { needCorrectAnswer } from './constants'
 
 export const getVerbAnswers = (verb: Verb) => {
   const answers = $answers.getState()
@@ -25,7 +26,7 @@ const isToday = (dateValue: number) => {
 export const isDoneOnToday = (verb: Verb) => {
   const answers = getVerbAnswers(verb)
   const correctAnswersToday = answers.filter(answer => answer.isCorrect && isToday(answer.createdAt))
-  return correctAnswersToday.length >= 2
+  return correctAnswersToday.length >= needCorrectAnswer
 }
 
 export const countCorrectAnswerToday = (verb: Verb) => {

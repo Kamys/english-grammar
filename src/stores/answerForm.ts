@@ -1,7 +1,8 @@
 import { combine, createEvent, createStore } from 'effector-logger'
-import { onUserNextQuestion, calcVerbsForToday, $verbsAll, initVerbsForToday} from './verbs'
+import { onUserNextQuestion, calcVerbsForToday, $verbsAll, initVerbsForToday, onUserAnswer } from './verbs'
 import { $answers, $currentQuestion } from './answerStatistic'
 import { getVerbScore, isDoneOnToday } from './utils'
+import { needLeanWordTodayCount } from './constants'
 
 interface AnswerForm {
   v2: string
@@ -42,8 +43,6 @@ export const $verbsLearned = combine($verbsAll, $answers, (verbsAll) => {
   return verbsAll.filter(isDoneOnToday)
 })
 
-const needLeanWordTodayCount = 10
-
 calcVerbsForToday.watch(() => {
   const verbsAll = $verbsAll.getState()
   const verbsLearned = $verbsLearned.getState()
@@ -64,3 +63,12 @@ calcVerbsForToday.watch(() => {
     .slice(0, needLeanWordCount)
   initVerbsForToday(verbForToday)
 })
+
+export enum QuestionFormStateState {
+  WAITING_ANSWER,
+  ANSWERED,
+}
+
+export const $nextFormState = createStore<QuestionFormStateState>(QuestionFormStateState.WAITING_ANSWER)
+  .on(onUserAnswer, () => QuestionFormStateState.ANSWERED)
+  .on(onUserNextQuestion, () => QuestionFormStateState.WAITING_ANSWER)

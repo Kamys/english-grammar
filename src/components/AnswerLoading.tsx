@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import { onInitAnswers, onSortVerb } from '../stores/answerStatistic'
+import { onInitAnswers, onSortVerb } from '../stores'
 import { Button, Spinner } from 'react-bootstrap'
 
 interface Props extends PropsWithChildren {

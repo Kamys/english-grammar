@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ChangeEvent, useCallback } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
-import { Verb } from '../stores/verbs'
+import { $nextFormState, QuestionFormStateState, Verb } from '../stores'
 import { useStore } from 'effector-react'
 import {
   $answerForm,
@@ -9,8 +9,7 @@ import {
   $hasErrors,
   onChangeV2,
   onChangeV3,
-} from '../stores/answerForm'
-import { $nextFormState, QuestionFormStateState } from './Application'
+} from '../stores'
 
 interface Props {
   verb: Verb,
