@@ -11,9 +11,9 @@ app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
 
-const filePath = "./answers.json"
+const filePath = "./appState/AppState.json"
 
-app.post("/answers-save", (req, res) => {
+app.post("/state-save", (req, res) => {
   const answerJson = JSON.stringify(req.body)
   fs.writeFile(filePath, answerJson, (err) => {
     if(err) {
@@ -24,13 +24,13 @@ app.post("/answers-save", (req, res) => {
   return res.sendStatus(200)
 });
 
-app.get("/answers", (req, res) => {
-  fs.readFile(filePath, 'utf8', (err, answersJson) => {
+app.get("/state", (req, res) => {
+  fs.readFile(filePath, 'utf8', (err, stateJson) => {
     if(err) {
       return res.json(err)
     }
     res.contentType("application/json")
-    res.end(answersJson);
+    res.end(stateJson);
   })
 });
 

@@ -21,10 +21,6 @@ export const LearnTodayPage: React.FC<Props> = () => {
   const currentVerb = useStore($currentQuestion)
   const verbsLearned = useStore($verbsLearned).length
 
-  useEffect(() => {
-    calcVerbsForToday()
-  }, [])
-
   if (!currentVerb) {
     return (
       <>

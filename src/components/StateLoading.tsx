@@ -1,22 +1,21 @@
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import { onInitAnswers, onSortVerb } from '../stores'
+import { onInitAppState } from '../stores'
 import { Button, Spinner } from 'react-bootstrap'
 
 interface Props extends PropsWithChildren {
 }
 
-export const AnswerLoading: React.FC<Props> = ({ children }) => {
+export const StateLoading: React.FC<Props> = ({ children }) => {
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState<AxiosError>(null)
 
   const loadAnswers = useCallback(() => {
     setLoading(true)
     setError(null)
-    axios.get('http://localhost:3000/answers').then(response => {
+    axios.get('http://localhost:3000/state').then(response => {
         setLoading(false)
-        onInitAnswers(response.data)
-        onSortVerb()
+        onInitAppState(response.data)
       },
     )
       .catch(setError)

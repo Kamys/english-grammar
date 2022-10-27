@@ -1,7 +1,7 @@
-import { Verb } from './verbs'
 import { partition } from 'lodash'
-import { $answers } from './answerStatistic'
 import { needCorrectAnswer } from './constants'
+import { Verb } from './Models'
+import { $answers } from './appState'
 
 export const getVerbAnswers = (verb: Verb) => {
   const answers = $answers.getState()

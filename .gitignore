@@ -7,4 +7,4 @@ upload
 .idea
 yarn-error.log
 /verbs/result.json
-./answers.json
+./appState/*

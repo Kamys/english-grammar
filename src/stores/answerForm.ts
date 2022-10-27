@@ -1,8 +1,9 @@
 import { combine, createEvent, createStore } from 'effector-logger'
-import { onUserNextQuestion, calcVerbsForToday, $verbsAll, initVerbsForToday, onUserAnswer } from './verbs'
-import { $answers, $currentQuestion } from './answerStatistic'
+import { $verbsAll } from './verbs'
+import { $currentQuestion } from './answerStatistic'
 import { getVerbScore, isDoneOnToday } from './utils'
 import { needLeanWordTodayCount } from './constants'
+import { $answers, calcVerbsForToday, initVerbsForToday, onUserAnswer, onUserNextQuestion } from './appState'
 
 interface AnswerForm {
   v2: string

@@ -1,19 +1,10 @@
 import { $hasErrors } from './answerForm'
-import { $verbsLearning, onUserNextQuestion, onUserAnswer } from './verbs'
-import {combine, createStore, createEvent } from 'effector-logger'
+import { $verbsLearning } from './verbs'
+import { combine, createStore, createEvent } from 'effector-logger'
 import { countCorrectAnswerToday, getVerbScore } from './utils'
 import axios from 'axios'
-
-interface Answer {
-  v1: string
-  createdAt: number
-  isCorrect: boolean
-}
-
-export const onSortVerb = createEvent()
-export const onInitAnswers = createEvent()
-export const $answers = createStore<Answer[]>([])
-  .on(onInitAnswers, (_, answers)  => answers)
+import { $answers, onSortVerb, onUserAnswer, onUserNextQuestion } from './appState'
+import { AppState } from './Models'
 
 $answers.on(onUserAnswer, answers => {
   const hasError = $hasErrors.getState()
@@ -31,7 +22,14 @@ $answers.on(onUserAnswer, answers => {
 
 onUserAnswer.watch(() => {
   const answers = $answers.getState()
-  axios.post("http://localhost:3000/answers-save", answers)
+  const verbsLearning = $verbsLearning.getState()
+
+  const appState: AppState = {
+    answers: answers,
+    verbsForToday: verbsLearning,
+  }
+
+  axios.post('http://localhost:3000/state-save', appState)
 })
 
 $verbsLearning.on(onSortVerb, verbs => {
@@ -56,7 +54,7 @@ export const $currentIndex = createStore<number>(0)
 
 export const $currentQuestion = combine($verbsLearning, $currentIndex, (verbs, currentIndex) => {
   const a = verbs[currentIndex] || null
-  console.log("$currentQuestion: ", a, { verbs: {...verbs}, currentIndex })
+  console.log('$currentQuestion: ', a, { verbs: { ...verbs }, currentIndex })
   return a
 })
 

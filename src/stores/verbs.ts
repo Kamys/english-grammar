@@ -1,26 +1,15 @@
-import { createEvent, createStore } from 'effector-logger'
+import { createStore } from 'effector-logger'
 import sourceVerbs from '../sourceVerbs'
-
-export interface Verb {
-  v1: string
-  v2: string
-  v3: string
-  translate: string
-  score: number
-}
-
-export const onUserAnswer = createEvent()
-export const onUserNextQuestion = createEvent()
+import { Verb } from './Models'
+import { isDoneOnToday } from './utils'
+import { initVerbsForToday, onUserNextQuestion } from './appState'
 
 onUserNextQuestion.watch(() => {
   console.log("=============== NextQuestion ===============")
 })
 
-export const initVerbsForToday = createEvent<Verb[]>()
-export const calcVerbsForToday = createEvent()
-
 export const $verbsLearning = createStore<Verb[]>([])
-  .on(initVerbsForToday, (_, verbs) => verbs)
+  .on(initVerbsForToday, (_, verbs) => verbs.filter(v => !isDoneOnToday(v)))
 export const $verbsForToday = createStore<Verb[]>([])
   .on(initVerbsForToday, (_, verbs) => verbs)
 export const $verbsAll = createStore<Verb[]>(sourceVerbs)
