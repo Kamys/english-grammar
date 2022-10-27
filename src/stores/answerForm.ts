@@ -1,4 +1,4 @@
-import { combine, createEvent, createStore } from 'effector'
+import { combine, createEvent, createStore } from 'effector-logger'
 import { onUserNextQuestion, calcVerbsForToday, $verbsAll, initVerbsForToday} from './verbs'
 import { $answers, $currentQuestion } from './answerStatistic'
 import { getVerbScore, isDoneOnToday } from './utils'
@@ -39,18 +39,21 @@ export const $hasErrors = combine($answerFormErrors, (answerFormErrors) => {
 })
 
 export const $verbsLearned = combine($verbsAll, $answers, (verbsAll) => {
-  let verbs = verbsAll.filter(isDoneOnToday)
-  return verbs
+  return verbsAll.filter(isDoneOnToday)
 })
+
+const needLeanWordTodayCount = 10
 
 calcVerbsForToday.watch(() => {
   const verbsAll = $verbsAll.getState()
   const verbsLearned = $verbsLearned.getState()
   const answers = $answers.getState()
 
-  const needLeanWordToday = verbsLearned.length <= 10
+  const needLeanWordCount = needLeanWordTodayCount - verbsLearned.length
+  console.log(needLeanWordCount)
 
-  if(!needLeanWordToday) {
+
+  if(needLeanWordCount <= 0) {
     initVerbsForToday([])
     return
   }
@@ -58,6 +61,6 @@ calcVerbsForToday.watch(() => {
   const verbForToday = verbsAll
     .filter(v => !isDoneOnToday(v))
     .sort((a, b) => getVerbScore(a) - getVerbScore(b))
-    .slice(0, 10)
+    .slice(0, needLeanWordCount)
   initVerbsForToday(verbForToday)
 })

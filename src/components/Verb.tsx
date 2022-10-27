@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
 import { Verb } from '../stores/verbs'
 import { useStore } from 'effector-react'
@@ -16,8 +16,6 @@ interface Props {
   verb: Verb,
 }
 
-const onChange = (event: ChangeEvent<HTMLInputElement>) => event.target.value
-
 export const VerbView: React.FC<Props> = ({ verb }) => {
   const forms = useStore($answerForm)
   const state = useStore($nextFormState)
@@ -25,6 +23,14 @@ export const VerbView: React.FC<Props> = ({ verb }) => {
   const hasErrors = useStore($hasErrors)
   const answerCorrect = state === QuestionFormStateState.ANSWERED && !hasErrors
   const showValidation = state === QuestionFormStateState.ANSWERED
+
+  const handlerChangeV2 = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    onChangeV2(event.target.value)
+  }, [])
+
+  const handlerChangeV3 = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    onChangeV3(event.target.value)
+  }, [])
 
   return (
     <Form noValidate validated={answerCorrect}>
@@ -37,7 +43,7 @@ export const VerbView: React.FC<Props> = ({ verb }) => {
             <Form.Control
               placeholder='V2'
               value={forms.v2}
-              onChange={onChangeV2.prepend(onChange)}
+              onChange={handlerChangeV2}
               isInvalid={showValidation && !!errors.v2}
 
             />
@@ -51,7 +57,7 @@ export const VerbView: React.FC<Props> = ({ verb }) => {
             <Form.Control
               placeholder='V3'
               value={forms.v3}
-              onChange={onChangeV3.prepend(onChange)}
+              onChange={handlerChangeV3}
               isInvalid={showValidation && !!errors.v3}
             />
             <Form.Control.Feedback type='invalid'>

@@ -1,4 +1,4 @@
-import { createEvent, createStore } from 'effector'
+import { createEvent, createStore } from 'effector-logger'
 import sourceVerbs from '../sourceVerbs'
 
 export interface Verb {
@@ -11,6 +11,10 @@ export interface Verb {
 
 export const onUserAnswer = createEvent()
 export const onUserNextQuestion = createEvent()
+
+onUserNextQuestion.watch(() => {
+  console.log("=============== NextQuestion ===============")
+})
 
 export const initVerbsForToday = createEvent<Verb[]>()
 export const calcVerbsForToday = createEvent()

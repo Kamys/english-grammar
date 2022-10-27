@@ -2,7 +2,7 @@ import React from 'react'
 import { useStore } from 'effector-react'
 import { ListGroup } from 'react-bootstrap'
 import { $verbsForToday } from '../stores/verbs'
-import { partition } from 'lodash'
+import { partition, sortBy } from 'lodash'
 import { $answers } from '../stores/answerStatistic'
 import { getVerbScore } from '../stores/utils'
 import { $verbsLearned } from '../stores/answerForm'
@@ -12,8 +12,8 @@ export const Answers = () => {
   const answers = useStore($answers)
   const verbsLearned = useStore($verbsLearned)
 
-  const items = verbs
-    .sort((a, b) => getVerbScore(a) - getVerbScore(b))
+  const items = sortBy(verbs, (a) => getVerbScore(a))
+    .sort()
     .map(verb => {
     const answerByVerb = answers.filter(v => v.v1 == verb.v1)
     const [correctAnswers, incorrectAnswers] = partition(answerByVerb, answer => answer.isCorrect)
