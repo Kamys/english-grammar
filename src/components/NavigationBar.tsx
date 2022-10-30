@@ -19,9 +19,6 @@ export const NavigationBar: React.FC<Props> = () => {
             <LinkContainer to='/'>
               <Nav.Link>Learn today</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/repetition'>
-              <Nav.Link>Repetition</Nav.Link>
-            </LinkContainer>
             <LinkContainer to='/progress'>
               <Nav.Link>Progress</Nav.Link>
             </LinkContainer>
