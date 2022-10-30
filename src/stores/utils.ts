@@ -2,6 +2,7 @@ import { partition } from 'lodash'
 import { needCorrectAnswer } from './constants'
 import { Verb } from './Models'
 import { $answers } from './appState'
+import dayjs from 'dayjs'
 
 export const getVerbAnswers = (verb: Verb) => {
   const answers = $answers.getState()
@@ -16,11 +17,7 @@ export const getVerbScore = (verb: Verb) => {
 }
 
 const isToday = (dateValue: number) => {
-  const today = new Date()
-  const date = new Date(dateValue)
-  return date.getDate() == today.getDate() &&
-    date.getMonth() == today.getMonth() &&
-    date.getFullYear() == today.getFullYear()
+  return dayjs(dateValue).isToday()
 }
 
 export const isDoneOnToday = (verb: Verb) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import { Container } from 'react-bootstrap'
@@ -7,7 +7,6 @@ import { StateLoading } from './StateLoading'
 import { NavigationBar } from './NavigationBar'
 import { LearnTodayPage } from '../pages/LearnTodayPage'
 import { ProgressPage } from '../pages/ProgressPage'
-import { calcVerbsForToday } from '../stores'
 
 export const Application = () => {
   return (
@@ -16,7 +15,6 @@ export const Application = () => {
         <NavigationBar />
         <Routes>
           <Route path='/' element={<LearnTodayPage />} />
-          <Route path='/repetition' element={<ProgressPage />} />
           <Route path='/progress' element={<ProgressPage />} />
         </Routes>
       </StateLoading>

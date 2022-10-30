@@ -34,7 +34,7 @@ export const LearnTodayPage: React.FC<Props> = () => {
   return (
     <>
       <Row className='mt-5'>
-        You need today learn {needLeanWordTodayCount} words. Answer correct {needCorrectAnswer} times on each word.
+        You need learn {needLeanWordTodayCount} words today. Answer correct {needCorrectAnswer} times on each word.
         <br/> Left: {needLeanWordTodayCount - verbsLearned}
       </Row>
       <Row className='mt-2'>
